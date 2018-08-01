@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'webtech.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'CSCI5308_3_TEST',
-        'USER': 'CSCI5308_3_TEST_USER',
-        'PASSWORD': 'CSCI5308_3_TEST_3411',
-        'HOST': 'db-5308.cs.dal.ca',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
