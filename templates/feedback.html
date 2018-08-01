@@ -1,0 +1,40 @@
+{% load static %}
+{% include "header.html" %} 
+{% for field in form.visible_fields %}
+    {{ field.help_text }} <br/>
+    {{ field }} <br/>
+    {{ field.errors }}<br/>
+{% endfor %}
+<div class="FeedbackPage">
+  <div class="container">
+    <form action="/feedback/save/" method="post">
+      {% csrf_token %}
+    <p class="p1 h4 emptyimage">Let's share some love!</p>
+    <div class="row p4">
+        <div class="col-sm-3">
+          <div>
+            <img src="{% static 'images/svg/love.svg' %}" style="width:100%;" class="border" alt="user">
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <input type="text" name="apartment_name" id="apartment_name" placeholder="Apartment Name" />
+          <span style="color: red;" id="errorfn">{{feedback_form.apartment_name.errors}}</span>
+          <div class="p1">
+            <img class="profile-icons p05 feedback_icon" onclick="changeRating(5)" data-val="5" src="{% static 'images/svg/in-love.svg' %}" alt="love_face"/>
+            <img class="profile-icons p05 feedback_icon" onclick="changeRating(4)" data-val="4" src="{% static 'images/svg/smile.svg' %}" alt="smile_face">
+            <img class="profile-icons p05 feedback_icon" onclick="changeRating(3)" data-val="3" src="{% static 'images/svg/smiling.svg' %}" alt="happy_face">
+            <img class="profile-icons p05 feedback_icon" onclick="changeRating(2)" data-val="2" src="{% static 'images/svg/mad.svg' %}" alt="mad_face">
+            <img class="profile-icons p05 feedback_icon" onclick="changeRating(1)" data-val="1" src="{% static 'images/svg/angry.svg' %}" alt="angry_face">
+            <input type="hidden" name="rating" id="rating">
+          </div>
+          <div>
+            <textarea class="comments" id="description" name="description" placeholder='Comments'></textarea>\
+            <span style="color: red;" id="errorfn">{{feedback_form.description.errors}}</span>
+          </div>
+          <div class="p1"><input type="Submit" class="btn btn-outline-dark" value="Submit Feedback"></div>
+        </div>
+        <input type="hidden" name="user_id" id="user_id" value="{{user_id}}"/>
+      </div>
+    </form>
+    </div>
+</div>

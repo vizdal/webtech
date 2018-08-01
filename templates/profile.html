@@ -1,0 +1,54 @@
+{% load static %}
+{% if is_update == 1 %}
+    {% include "header.html" %} 
+{% endif %}
+<script type="text/template" id="user_profile_template">
+<div>
+  <div class="p1">
+     <div class="row p4">
+        <div class="col-sm-3">
+		<div><img src="{% static 'pro_image/' %}{{file_name}}" style="width:100%;" class="border" alt="user"></div>
+        </div>
+        <div class="col-sm-9">
+          <div id="studentName" class="h3">
+            <div class="row">
+              <div class="col-sm-8">
+		      <span id="firstname">##first_name##</span>&#160;<span id="lastname">##last_name##</span>
+              </div>
+              <div class="col-sm-4">
+		      <img title="##meal_title##" class="profile-icons" src="{% static 'images/svg/##meal_image##.svg' %}" alt="Non-Vegetarian">
+		      <img title="##smk_title##" class="profile-icons" src="{% static 'images/svg/##smk_image##.svg' %}" alt="Non-Smoker">
+		      <img title="##alc_title##" class="profile-icons" src="{% static 'images/svg/##alc_image##.svg' %}" alt="Non-Alcoholic">
+              </div>
+            </div>
+          <div id="courses" class="h6">##dept##, ##univ##</div>
+          <div>
+            <span class="h6 txtgray pr1">Gender: ##gen##</span>
+	    <img style="display:none;" id="Gender" title="Male" class="gen" src="{% static 'images/svg/m.svg' %}" alt="Male">
+          </div>
+          <div style="padding-top:1em;padding-bottom:1em;">
+            <span class="h6 txtgray pr1">Email: ##email##</span>
+	    <img style="display:none;" id="Nation" title="Canada" class="caf" src="{% static 'images/svg/caf.svg' %}" alt="Canada">
+          </div>
+          <div>
+            <span class="txtgray h6 pr1">Phone:</span>
+            <span class="h6">##phone##</span>
+          </div>
+          <div class="pt1">
+		  <img style="display:none;" title="Facebook" class="social-icons" src="{% static 'images/svg/facebook.svg'%}" alt="Facebook">
+		  <img title="WhatsApp" style="display:none;" class="social-icons" src="{% static 'images/svg/whatsapp.svg' %}" alt="WhatsApp">
+		  <img title="email" style="display:none;" class="social-icons" src="{% static 'images/svg/email.svg' %}" alt="email">
+          </div>
+        </div>
+      </div> 
+  </div>
+  <div class="emptyimage">
+    <button type="button" class="btn btn-success" style="width:10em;" onclick="load_profile_edit({{saved_row.user_id}})">Edit</button>
+  </div>
+</div>
+</div>
+</script>
+<script>
+	var user_id = {{saved_row.user_id}}
+	load_profile_data(user_id)
+</script> 

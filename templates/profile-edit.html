@@ -1,0 +1,96 @@
+{% load static %}
+{% if is_update == 1 %}
+    {% include "header.html" %} 
+{% endif %}
+{% for field in form.visible_fields %}
+    {{ field.help_text }} <br/>
+    {{ field }} <br/>
+    {{ field.errors }}<br/>
+{% endfor %}
+<div id="profileparent" ng-app="">
+    <form method="post" id="profile_form" enctype="multipart/form-data" action="/profile/update_profile/" name="profileForm">
+	{% csrf_token %}
+        <p class="p1 h4 emptyimage">Profile</p>
+        <div class="row p4" style="padding-top: 0;margin-left: 0;margin-right: 0;">
+            <div class="col-sm-6 emptyimage">
+                <div class="centerimage">
+			<img src="{% static saved_row.profile_image.url %}" style="width:50%;" class="border" alt="User" />
+                </div>
+                <div class="p1">
+                    <input type="file" name="profileimage"/>
+                </div>
+                <div class="emptyimage p1">
+            {% if saved_row.is_veg == 'N' %}
+			     <img title="Non-Vegetarian" class="profile-icons ptr" id="meal" onclick="toggleMealSelection()" src="{% static 'images/svg/nv.svg' %}" alt="Non-Vegetarian">
+            {% else %}
+                <img title="Non-Vegetarian" class="profile-icons ptr" id="meal" onclick="toggleMealSelection()" src="{% static 'images/svg/veg.svg' %}" alt="Vegetarian">
+            {% endif %}
+			<input type="hidden" value='{{saved_row.is_veg}}' name='is_veg' id="is_veg_hidden"/>
+            {% if saved_row.is_smoke == 'N' %}
+			     <img title="Non-Smoker" class="profile-icons ptr" id="smoke" onclick="toggleSmokeSelection()" src="{% static 'images/svg/ns.svg' %}" alt="Non-Smoker">
+			{% else %}
+                <img title="Non-Smoker" class="profile-icons ptr" id="smoke" onclick="toggleSmokeSelection()" src="{% static 'images/svg/smoke.svg' %}" alt="Smoker">
+            {% endif %}
+            <input type="hidden" value='{{saved_row.is_smoke}}' name='is_smoke' id="is_smoke_hidden"/>
+			{% if saved_row.is_alcohol == 'N' %}
+                <img title="Non-Alcoholic" class="profile-icons ptr" id="alcohol" onclick="toggleAlcoholSelection()" src="{% static 'images/svg/na.svg' %}" alt="Non-Alcoholic">
+            {% else %}
+                <img title="Non-Alcoholic" class="profile-icons ptr" id="alcohol" onclick="toggleAlcoholSelection()" src="{% static 'images/svg/drink.svg' %}" alt="Alcoholic">
+            {% endif %}
+            <input type="hidden" value='{{saved_row.is_alcohol}}' name='is_alcohol' id="is_alcohol_hidden"/>
+		</div>
+                <div class="emptyimage p1">
+			<button type="button" class="btn btn-success" style="width: 10em;display:none;background-color:  #3B5998;" onclick="load_profile()"><img style="width: 2em;float: left;" src="{% static 'images/svg/fb.svg' %}" alt="Facebook"><span class="h6 vm">Facebook</span></button>
+			<button type="button" class="btn btn-success" style="width: 10em;display:none;background-color:  #dd4b39;" onclick="load_profile()"><img style="width: 2em;float: left;" src="{% static 'images/svg/gmail.svg' %}" alt="Google"><span class="h6 vm">Google</span></button>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="p05">
+                    <label for="first_name" class="txtgray">First Name</label>
+                    <input type="text" id="first_name" ng-required="true" class="form-control" name="first_name" value="{{saved_row.first_name}}" ng-model="firstname">
+                    {% verbatim %}
+		    	<span class="txtgray" style="font-size: 0.6em;">Nice to meet you {{firstname}}!</span>
+		    {% endverbatim %}
+		    <span style="color: red;" id="errorfn">{{profile_form.first_name.errors}}</span>
+                </div>
+                <div class="p05">
+                    <label for="last_name" class="txtgray">Last Name</label>
+                    <input name="last_name" value="{{saved_row.last_name}}" ng-required="true" type="text" id="lastname" class="form-control">
+                    <span style="color: red;" id="errorln">{{profile_form.last_name.errors}}</span>
+                </div>
+                <div class="p05">
+                    <label for="gender" class="txtgray">Gender</label>
+                    <select class="form-control" name="gender" id="gender">
+                        <option value='M'>Male</option>
+                        <option value='F'>Female</option>
+                        <option value='O'>Other</option>
+                        <option value='P'>Prefer not to say</option>
+                    </select>
+                </div>
+                <div class="p05">
+                    <label for="email" class="txtgray">email</label>
+                    <input type="text" id="email" name="email" value="{{saved_row.email}}" ng-required="true" class="form-control">
+                    <span style="color: red;" id="errorem">{{profile_form.email.errors}}</span>
+                </div>
+                <div class="p05">
+                    <label for="phone" class="txtgray">Phone Number</label>
+                    <input type="text" id="phone" name="phone" value="{{saved_row.phone}}" ng-required="true" class="form-control">
+                    <span style="color: red;" id="errorph">{{profile_form.phone.errors}}</span>
+                </div>
+                <div class="p05">
+                    <label for="university" class="txtgray">University</label>
+                    <input type="text" id="university" name="university" value="{{saved_row.university}}" ng-required="true" class="form-control">
+                    <span style="color: red;" id="errorun">{{profile_form.university.errors}}</span>
+                </div>
+                <div class="p05">
+                    <label for="branch" class="txtgray">Branch</label>
+                    <input type="text" id="branch" name="branch" ng-required="true" value="{{saved_row.branch}}" class="form-control">
+                    <span style="color: red;" id="errorbr">{{profile_form.branch.errors}}</span>
+                </div>  
+            </div>
+        </div>
+        <div class="emptyimage p1">
+            <button class="btn btn-success" style="width: 10em;"> Save</button>
+        </div>
+    </form>
+</div>
