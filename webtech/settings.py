@@ -79,9 +79,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tectum',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'USER': 'CSCI5308_3_DEVINT_USER',
+        'PASSWORD': 'CSCI5308_3_DEVINT_3292',
+        'HOST': 'CSCI5308_3_DEVINT',
         'PORT': '3306',
     }
 }
