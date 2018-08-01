@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'webtech.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tectum',
+        'NAME': 'CSCI5308_3_TEST',
         'USER': 'CSCI5308_3_TEST_USER',
         'PASSWORD': 'CSCI5308_3_TEST_3411',
-        'HOST': 'CSCI5308_3_DEVINT',
+        'HOST': 'db-5308.cs.dal.ca',
         'PORT': '3306',
     }
 }
